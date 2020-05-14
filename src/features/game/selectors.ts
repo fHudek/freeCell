@@ -11,3 +11,5 @@ export const getFoundation = (state: RootState, key: Suit) => state.game.foundat
 export const getFoundationsInArray = (state: RootState) => _.values(state.game.foundation)
 
 export const getDraggedCard = (state: RootState) => state.game.draggedCard
+
+export const getNumberOfSteps = (state: RootState) => state.game.numberOfSteps

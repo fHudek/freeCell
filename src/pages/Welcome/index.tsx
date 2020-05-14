@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import * as route from '../../routes'
 import { useDispatch } from 'react-redux'
@@ -15,24 +15,23 @@ const Wrapper = styled.div`
 
 export const WelcomePage = () => {
   const dispatch = useDispatch()
+
+  const onClick = useCallback(() => {
+    dispatch(GameActions.dealCards())
+  }, [dispatch])
+
+  const onClickSecondary = useCallback(() => {
+    dispatch(GameActions.dealCards(true))
+  }, [dispatch])
+
   return (
     <Wrapper>
       <h1>Welcome to awesome FreeCell game.</h1>
-      <LinkButton
-        onClick={() => {
-          dispatch(GameActions.dealCards())
-        }}
-        to={route.PLAY}
-      >
+      <LinkButton onClick={onClick} to={route.PLAY}>
         Start game!
       </LinkButton>
-      <SecondaryLinkButton
-        onClick={() => {
-          dispatch(GameActions.dealCards(true))
-        }}
-        to={route.PLAY}
-      >
-        Start easy test game.
+      <SecondaryLinkButton onClick={onClickSecondary} to={route.PLAY}>
+        Start easy test game
       </SecondaryLinkButton>
     </Wrapper>
   )
