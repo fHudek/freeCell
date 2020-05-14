@@ -6,6 +6,7 @@ import { RootState } from '../../features/store'
 import { getCascade } from '../../features/game/selectors'
 import { Card } from '../Card'
 import _ from 'lodash'
+import { Droppable } from 'react-beautiful-dnd'
 
 const CascadeWrapper = styled.div`
   margin: 2rem;
@@ -17,18 +18,22 @@ type Props = {
 
 export const Cascade = ({ index }: Props) => {
   const cards = useSelector((state: RootState) => getCascade(state, index))
-  //TODO remove i as key
   return (
-    <CascadeWrapper>
-      {cards.length > 0 ? (
-        <>
-          {_.map(cards, (card, i) => (
-            <Card key={i} card={card}></Card>
-          ))}
-        </>
-      ) : (
-        <Placeholder>CASCADE</Placeholder>
+    <Droppable droppableId={`c${index}`}>
+      {(provided) => (
+        <CascadeWrapper {...provided.droppableProps} ref={provided.innerRef}>
+          {cards.length > 0 ? (
+            <>
+              {_.map(cards, (card, i) => (
+                <Card key={card.id} card={card} index={i} isDragDisabled={cards.length - 1 > i}></Card>
+              ))}
+            </>
+          ) : (
+            <Placeholder>CASCADE</Placeholder>
+          )}
+          {provided.placeholder}
+        </CascadeWrapper>
       )}
-    </CascadeWrapper>
+    </Droppable>
   )
 }

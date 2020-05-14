@@ -1,6 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Placeholder } from '../Placeholder'
+import { Droppable } from 'react-beautiful-dnd'
+import { useSelector } from 'react-redux'
+import { getFreeCell } from '../../features/game/selectors'
+import { RootState } from '../../features/store'
+import { Card } from '../Card'
 
 const FreeCellWrapper = styled.div`
   border: 1px solid grey;
@@ -12,6 +17,15 @@ type Props = {
 }
 
 export const FreeCell = ({ index }: Props) => {
-  const card = null
-  return <FreeCellWrapper>{card ? <div>TODO add card</div> : <Placeholder>FREE CELL</Placeholder>}</FreeCellWrapper>
+  const card = useSelector((state: RootState) => getFreeCell(state, index))
+  return (
+    <Droppable droppableId={`e${index}`}>
+      {(provided) => (
+        <FreeCellWrapper {...provided.droppableProps} ref={provided.innerRef}>
+          {card ? <Card card={card} index={0} /> : <Placeholder>FREE CELL</Placeholder>}
+          {provided.placeholder}
+        </FreeCellWrapper>
+      )}
+    </Droppable>
+  )
 }

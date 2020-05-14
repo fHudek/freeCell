@@ -1,10 +1,9 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
 import { WelcomePage } from './pages/Welcome'
 import { PlayPage } from './pages/Play'
 import { EndPage } from './pages/End'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import * as route from './routes'
 
 // TODO maybe add lazy loading of scripts for pages

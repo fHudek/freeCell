@@ -16,8 +16,8 @@ const shuffle = (cards: Card[]) => {
   return cards
 }
 
-export const dealCards = (): [Card[], Card[], Card[], Card[], Card[], Card[], Card[], Card[]] => {
-  const shuffledDeck = shuffle(_.slice(DECK))
+export const dealCards = (): Card[][] => {
+  const shuffledDeck = shuffle(_.values(DECK))
   return [
     _.slice(shuffledDeck, 0, 7),
     _.slice(shuffledDeck, 7, 14),
@@ -32,4 +32,16 @@ export const dealCards = (): [Card[], Card[], Card[], Card[], Card[], Card[], Ca
 
 export const isCardRed = (suit: Suit) => {
   return suit === 'H' || suit === 'D'
+}
+
+export const canBeMoveToCascade = (lastCard: Card) => {
+  return true
+}
+
+export const isFreeCellEmpty = () => {
+  return true
+}
+
+export const canBeMovedToFoundation = () => {
+  return true
 }
