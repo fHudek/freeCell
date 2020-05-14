@@ -34,8 +34,8 @@ export const gameReducer: Reducer<GameState, AnyAction> = (state = initState, ac
   switch (action.type) {
     case actions.DEAL_CARDS: {
       return {
-        ...state,
-        cascades: dealCards()
+        ...initState,
+        cascades: dealCards(action.payload)
       }
     }
     case actions.MOVE_CARD: {

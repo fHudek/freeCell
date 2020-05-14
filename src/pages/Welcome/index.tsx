@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import * as route from '../../routes'
 import { useDispatch } from 'react-redux'
 import { GameActions } from '../../features/game/actions'
+import { LinkButton, SecondaryLinkButton } from '../../components/Link'
 
 const Wrapper = styled.div`
   height: 100%;
@@ -11,13 +11,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
-
-const LinkButton = styled(Link)`
-  background-color: #50c878;
-  padding: 3rem;
-  border-radius: 1rem;
-  text-decoration: none;
 `
 
 export const WelcomePage = () => {
@@ -33,6 +26,14 @@ export const WelcomePage = () => {
       >
         Start game!
       </LinkButton>
+      <SecondaryLinkButton
+        onClick={() => {
+          dispatch(GameActions.dealCards(true))
+        }}
+        to={route.PLAY}
+      >
+        Start easy test game.
+      </SecondaryLinkButton>
     </Wrapper>
   )
 }

@@ -48,7 +48,7 @@ export const Foundation = ({ suit }: Props) => {
           {cards.length > 0 ? (
             <>
               {_.map(cards, (card, index) => (
-                <CardStyled card={card} index={index} />
+                <CardStyled key={card.id} card={card} index={index} />
               ))}
             </>
           ) : (

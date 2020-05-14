@@ -16,8 +16,8 @@ const shuffle = (cards: Card[]) => {
   return cards
 }
 
-export const dealCards = (): Card[][] => {
-  const shuffledDeck = shuffle(_.values(DECK))
+export const dealCards = (isTest?: boolean): Card[][] => {
+  const shuffledDeck = isTest ? _.reverse(_.values(DECK)) : shuffle(_.values(DECK))
   return [
     _.slice(shuffledDeck, 0, 7),
     _.slice(shuffledDeck, 7, 14),
@@ -82,4 +82,10 @@ export const hasOppositeColor = (cardA: Card, cardB: Card) => {
   } else {
     return cardB.suit === 'D' || cardB.suit === 'H'
   }
+}
+
+export const hasWon = (foundations: Card[][]) => {
+  let result = true
+  _.forEach(foundations, (foundation) => (result = foundation.length === 13))
+  return result
 }

@@ -11,6 +11,8 @@ import { theme } from '../../constants/theme'
 const FreeCellWrapper = styled.div<{ isDisabled: boolean }>`
   border: 1px solid grey;
   margin: 2rem;
+  min-width: ${theme.sizes.cardX};
+  min-height: ${theme.sizes.cardY};
   box-shadow: ${({ isDisabled }) => (isDisabled ? '0' : theme.enabledDroppableShadow)};
 `
 

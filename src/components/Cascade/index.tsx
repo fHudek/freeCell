@@ -25,8 +25,8 @@ export const Cascade = ({ index }: Props) => {
   const lastCard = cards[cards.length - 1]
   const isDisabled = !(
     !!draggedCard &&
-    isSmallerByOne(draggedCard, lastCard) &&
-    hasOppositeColor(draggedCard, lastCard)
+    (_.isNil(lastCard) ||
+      (_.isNil(lastCard) && isSmallerByOne(draggedCard, lastCard) && hasOppositeColor(draggedCard, lastCard)))
   )
   return (
     <Droppable droppableId={`c${index}`} isDropDisabled={isDisabled}>

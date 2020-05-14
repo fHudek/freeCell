@@ -1,13 +1,18 @@
 import { Card } from '../types'
 
 export const DECK: Record<string, Card> = {
+  CA: {
+    id: 'CA',
+    suit: 'C',
+    value: 'A'
+  },
   C2: {
     id: 'C2',
     suit: 'C',
     value: '2'
   },
   C3: {
-    id: 'C2',
+    id: 'C3',
     suit: 'C',
     value: '3'
   },
@@ -61,9 +66,9 @@ export const DECK: Record<string, Card> = {
     suit: 'C',
     value: 'K'
   },
-  CA: {
-    id: 'CA',
-    suit: 'C',
+  DA: {
+    id: 'DA',
+    suit: 'D',
     value: 'A'
   },
   D2: {
@@ -126,9 +131,9 @@ export const DECK: Record<string, Card> = {
     suit: 'D',
     value: 'K'
   },
-  DA: {
-    id: 'DA',
-    suit: 'D',
+  HA: {
+    id: 'HA',
+    suit: 'H',
     value: 'A'
   },
   H2: {
@@ -191,9 +196,9 @@ export const DECK: Record<string, Card> = {
     suit: 'H',
     value: 'K'
   },
-  HA: {
-    id: 'HA',
-    suit: 'H',
+  PA: {
+    id: 'PA',
+    suit: 'P',
     value: 'A'
   },
   P2: {
@@ -255,10 +260,5 @@ export const DECK: Record<string, Card> = {
     id: 'PK',
     suit: 'P',
     value: 'K'
-  },
-  PA: {
-    id: 'PA',
-    suit: 'P',
-    value: 'A'
   }
 }
