@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import logo from './logo.svg'
+import './App.css'
+import { StartPage } from './pages/Start'
+import { GamePage } from './pages/Game'
+import { EndPage } from './pages/End'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import * as route from './routes'
+
+// TODO maybe add lazy loading of scripts for pages
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route exact path={route.START}>
+          <StartPage />
+        </Route>
+        <Route path={route.GAME}>
+          <GamePage />
+        </Route>
+        <Route path={route.END}>
+          <EndPage />
+        </Route>
+      </Switch>
+    </Router>
+  )
 }
 
-export default App;
+export default App

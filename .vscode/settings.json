@@ -1,0 +1,35 @@
+{
+  "editor.tabCompletion": "on",
+  "editor.snippetSuggestions": "bottom",
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    { "language": "typescript", "autoFix": true },
+    { "language": "typescriptreact", "autoFix": true }
+  ],
+  "files.exclude": {
+    "**/build": true,
+    "**/coverage": true,
+    "**/node_modules": true,
+    ".browserslistrc": true,
+    ".editorconfig": true,
+    ".eslintrc": true,
+    ".gitattributes": true,
+    ".gitignore": true,
+    ".npmrc": true,
+    ".prettierrc": true,
+    "craco.config.js": true,
+    "tsconfig.json": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "src/assets/**/*.svg": true,
+    "package-lock.json": true
+  },
+  "typescript.suggest.autoImports": false,
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
