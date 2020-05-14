@@ -1,5 +1,6 @@
 import React from 'react'
+import { GameBoard } from '../../components/GameBoard'
 
 export const PlayPage = () => {
-  return <h1>This is a GAME page.</h1>
+  return <GameBoard />
 }

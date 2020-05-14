@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import * as route from '../../routes'
+import { useDispatch } from 'react-redux'
+import { GameActions } from '../../features/game/actions'
 
 const Wrapper = styled.div`
   height: 100%;
@@ -19,10 +21,18 @@ const LinkButton = styled(Link)`
 `
 
 export const WelcomePage = () => {
+  const dispatch = useDispatch()
   return (
     <Wrapper>
       <h1>Welcome to awesome FreeCell game.</h1>
-      <LinkButton to={route.PLAY}>Start game!</LinkButton>
+      <LinkButton
+        onClick={() => {
+          dispatch(GameActions.dealCards())
+        }}
+        to={route.PLAY}
+      >
+        Start game!
+      </LinkButton>
     </Wrapper>
   )
 }
