@@ -26,4 +26,11 @@ Examples of enhancements:
 - better written utils
 - graphics(even it was not required)
 
+What could have been added:
+- counter
+- time
+- undo(history)
+- possibility to choose from pre loaded shuffles
+
+
 If you have any questions don't hesitate to contact me.
