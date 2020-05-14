@@ -4,8 +4,8 @@ export const CARD_CLICK = 'game/CARD_CLICK'
 export const SET_DRAGGED_CARD = 'game/SET_DRAGGED_CARD'
 
 export const GameActions = {
-  dealCards: (isTest?: boolean) => {
-    return { type: DEAL_CARDS, payload: isTest }
+  dealCards: (type?: 'f' | 'r' | 'e') => {
+    return { type: DEAL_CARDS, payload: type }
   },
   moveCard: (result: any) => {
     return { type: MOVE_CARD, payload: result }

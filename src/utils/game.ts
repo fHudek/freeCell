@@ -1,4 +1,5 @@
 import { DECK } from '../constants/deck'
+import data from '../files/data.json'
 import _ from 'lodash'
 import { Card, Suit } from '../types'
 
@@ -16,8 +17,22 @@ const shuffle = (cards: Card[]) => {
   return cards
 }
 
-export const dealCards = (isTest?: boolean): Card[][] => {
-  const shuffledDeck = isTest ? _.reverse(_.values(DECK)) : shuffle(_.values(DECK))
+export const dealCards = (type?: 'f' | 'r' | 'e'): Card[][] => {
+  let shuffledDeck = null
+  const deckArray = _.values(DECK)
+  switch (type) {
+    case 'e':
+      shuffledDeck = _.reverse(deckArray)
+      break
+    case 'f':
+      const order = data.order
+      shuffledDeck = _.map(order, (i) => {
+        return deckArray[i]
+      })
+      break
+    default:
+      shuffledDeck = shuffle(deckArray)
+  }
   return [
     _.slice(shuffledDeck, 0, 7),
     _.slice(shuffledDeck, 7, 14),

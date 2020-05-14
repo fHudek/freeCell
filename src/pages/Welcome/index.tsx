@@ -20,8 +20,12 @@ export const WelcomePage = () => {
     dispatch(GameActions.dealCards())
   }, [dispatch])
 
-  const onClickSecondary = useCallback(() => {
-    dispatch(GameActions.dealCards(true))
+  const onClickEasy = useCallback(() => {
+    dispatch(GameActions.dealCards('e'))
+  }, [dispatch])
+
+  const onClickPreloaded = useCallback(() => {
+    dispatch(GameActions.dealCards('f'))
   }, [dispatch])
 
   return (
@@ -30,8 +34,11 @@ export const WelcomePage = () => {
       <LinkButton onClick={onClick} to={route.PLAY}>
         Start game!
       </LinkButton>
-      <SecondaryLinkButton onClick={onClickSecondary} to={route.PLAY}>
+      <SecondaryLinkButton onClick={onClickEasy} to={route.PLAY}>
         Start easy test game
+      </SecondaryLinkButton>
+      <SecondaryLinkButton onClick={onClickPreloaded} to={route.PLAY}>
+        Start game with preloaded shuffle
       </SecondaryLinkButton>
     </Wrapper>
   )
