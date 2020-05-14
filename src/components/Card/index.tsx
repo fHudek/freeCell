@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Card as CardType } from '../../types'
 import styled from 'styled-components'
 import { isCardRed } from '../../utils/game'
 import { theme } from '../../constants/theme'
 import { Draggable } from 'react-beautiful-dnd'
+import { useDispatch } from 'react-redux'
+import { GameActions } from '../../features/game/actions'
 
 const CardWrapper = styled.div`
   border: 1px solid grey;
@@ -27,15 +29,22 @@ const CardLabel = styled.span<{ isRed: boolean }>`
 type Props = {
   card: CardType
   index: number
+  cascadeIndex?: number
   isDragDisabled?: boolean
   className?: string
 }
 
-export const Card = ({ card, index, isDragDisabled = false, className = '' }: Props) => {
+export const Card = ({ card, index, isDragDisabled = false, className = '', cascadeIndex }: Props) => {
+  const dispatch = useDispatch()
+
+  const onClick = useCallback(() => {
+    if (!isDragDisabled) dispatch(GameActions.cardClick(card.id, cascadeIndex))
+  }, [card.id, cascadeIndex, dispatch, isDragDisabled])
+
   return (
     <Draggable draggableId={card.id} index={index} isDragDisabled={isDragDisabled}>
       {(provided) => (
-        <CardWrapper className={className} {...provided.draggableProps} {...provided.dragHandleProps}>
+        <CardWrapper onClick={onClick} className={className} {...provided.draggableProps} {...provided.dragHandleProps}>
           <CardLabel ref={provided.innerRef} isRed={isCardRed(card.suit)}>{`${card.suit} ${card.value}`}</CardLabel>
         </CardWrapper>
       )}

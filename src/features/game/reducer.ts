@@ -38,6 +38,30 @@ export const gameReducer: Reducer<GameState, AnyAction> = (state = initState, ac
         cascades: dealCards(action.payload)
       }
     }
+    case actions.CARD_CLICK: {
+      const { cardId, cascadeIndex } = action.payload
+      if (!cascadeIndex) {
+        return state
+      }
+      const freeIndex = _.indexOf(state.freeCells, null)
+
+      let cascades = [...state.cascades]
+      let newCascade = cascades[cascadeIndex]
+      newCascade = _.slice(newCascade, 0, newCascade.length - 1)
+      cascades[cascadeIndex] = newCascade
+
+      if (freeIndex > -1) {
+        let freeCells = [...state.freeCells]
+        freeCells[freeIndex] = DECK[cardId]
+        return {
+          ...state,
+          freeCells: [...freeCells],
+          cascades: cascades
+        }
+      } else {
+        return state
+      }
+    }
     case actions.MOVE_CARD: {
       const { source, destination, draggableId } = action.payload
       let tempState = { ...state, draggedCard: null }

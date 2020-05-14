@@ -35,7 +35,13 @@ export const Cascade = ({ index }: Props) => {
           {cards.length > 0 ? (
             <>
               {_.map(cards, (card, i) => (
-                <Card key={card.id} card={card} index={i} isDragDisabled={cards.length - 1 > i}></Card>
+                <Card
+                  cascadeIndex={index}
+                  key={card.id}
+                  card={card}
+                  index={i}
+                  isDragDisabled={cards.length - 1 > i}
+                ></Card>
               ))}
             </>
           ) : (
