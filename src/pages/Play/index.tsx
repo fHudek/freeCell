@@ -1,5 +1,5 @@
 import React from 'react'
 
-export const GamePage = () => {
+export const PlayPage = () => {
   return <h1>This is a GAME page.</h1>
 }

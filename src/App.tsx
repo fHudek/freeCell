@@ -1,8 +1,8 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { StartPage } from './pages/Start'
-import { GamePage } from './pages/Game'
+import { WelcomePage } from './pages/Welcome'
+import { PlayPage } from './pages/Play'
 import { EndPage } from './pages/End'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import * as route from './routes'
@@ -13,11 +13,11 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path={route.START}>
-          <StartPage />
+        <Route exact path={route.WELCOME}>
+          <WelcomePage />
         </Route>
-        <Route path={route.GAME}>
-          <GamePage />
+        <Route path={route.PLAY}>
+          <PlayPage />
         </Route>
         <Route path={route.END}>
           <EndPage />
