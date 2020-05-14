@@ -15,6 +15,7 @@ export type GameState = {
     P: Card[]
   }
   cascades: Card[][]
+  draggedCard: Card | null
 }
 
 export const initState: GameState = {
@@ -25,7 +26,8 @@ export const initState: GameState = {
     H: [],
     P: []
   },
-  cascades: dealCards()
+  cascades: dealCards(),
+  draggedCard: null
 }
 
 export const gameReducer: Reducer<GameState, AnyAction> = (state = initState, action) => {
@@ -38,13 +40,16 @@ export const gameReducer: Reducer<GameState, AnyAction> = (state = initState, ac
     }
     case actions.MOVE_CARD: {
       const { source, destination, draggableId } = action.payload
+      let tempState = { ...state, draggedCard: null }
+      if (destination == null) {
+        return tempState
+      }
       const sourceId = source.droppableId
       const sourceContainerType = sourceId.substring(0, 1)
       const sourceContainerIdentifier = sourceId.substring(1, 2)
       const destinationId = destination.droppableId
       const destinationContainerType = destinationId.substring(0, 1)
       const destinationContainerIdentifier = destinationId.substring(1, 2)
-      let tempState = { ...state }
       let cascades = [...state.cascades]
       let foundation = { ...state.foundation }
       let freeCells = [...state.freeCells]
@@ -119,6 +124,13 @@ export const gameReducer: Reducer<GameState, AnyAction> = (state = initState, ac
         }
       }
       return tempState
+    }
+    case actions.SET_DRAGGED_CARD: {
+      const { draggableId } = action.payload
+      return {
+        ...state,
+        draggedCard: DECK[draggableId]
+      }
     }
     default:
       return state

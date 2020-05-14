@@ -7,7 +7,6 @@ import { DragDropContext } from 'react-beautiful-dnd'
 import { RootState } from '../../features/store'
 import { Dispatch } from 'redux'
 import { GameActions } from '../../features/game/actions'
-import { ContainerId } from '../../types'
 import { connect } from 'react-redux'
 
 const GameBoardWrapper = styled.div`
@@ -25,9 +24,15 @@ const LastFreeCell = styled(FreeCell)`
 
 type Props = {
   moveCard: (result: any) => void
+  setDraggedCard: (result: any) => void
 }
 
 export class GameBoardComponent extends PureComponent<Props> {
+  onDragStart = (result: any) => {
+    const { setDraggedCard } = this.props
+    setDraggedCard(result)
+  }
+
   onDragEnd = (result: any) => {
     const { moveCard } = this.props
     moveCard(result)
@@ -35,7 +40,7 @@ export class GameBoardComponent extends PureComponent<Props> {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
+      <DragDropContext onDragEnd={this.onDragEnd} onDragStart={this.onDragStart}>
         <GameBoardWrapper>
           <GameBoardInnerWrapper>
             <FreeCell index={0} />
@@ -66,7 +71,8 @@ export class GameBoardComponent extends PureComponent<Props> {
 const mapStateToProps = (state: RootState) => ({})
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  moveCard: (result: any) => dispatch(GameActions.moveCard(result))
+  moveCard: (result: any) => dispatch(GameActions.moveCard(result)),
+  setDraggedCard: (result: any) => dispatch(GameActions.setDraggedCard(result))
 })
 
 export const GameBoard = connect(mapStateToProps, mapDispatchToProps)(GameBoardComponent)

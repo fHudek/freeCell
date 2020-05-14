@@ -45,3 +45,41 @@ export const isFreeCellEmpty = () => {
 export const canBeMovedToFoundation = () => {
   return true
 }
+
+export const getCardIntValue = () => {}
+
+const ValueToInt = {
+  A: 0,
+  '2': 1,
+  '3': 2,
+  '4': 3,
+  '5': 4,
+  '6': 5,
+  '7': 6,
+  '8': 7,
+  '9': 8,
+  '10': 9,
+  J: 10,
+  Q: 11,
+  K: 12
+}
+
+export const isSmallerByOne = (cardA: Card, cardB: Card) => {
+  return ValueToInt[cardA.value] - ValueToInt[cardB.value] === -1
+}
+
+export const hasSameSuit = (card: Card, suit: Suit) => {
+  return card.suit === suit
+}
+
+export const isAce = (card: Card) => {
+  return card.value === 'A'
+}
+
+export const hasOppositeColor = (cardA: Card, cardB: Card) => {
+  if (cardA.suit === 'D' || cardA.suit === 'H') {
+    return cardB.suit === 'C' || cardB.suit === 'P'
+  } else {
+    return cardB.suit === 'D' || cardB.suit === 'H'
+  }
+}

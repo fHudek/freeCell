@@ -3,13 +3,16 @@ import styled from 'styled-components'
 import { Placeholder } from '../Placeholder'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../features/store'
-import { getCascade } from '../../features/game/selectors'
+import { getCascade, getDraggedCard } from '../../features/game/selectors'
 import { Card } from '../Card'
 import _ from 'lodash'
 import { Droppable } from 'react-beautiful-dnd'
+import { theme } from '../../constants/theme'
+import { isSmallerByOne, hasOppositeColor } from '../../utils/game'
 
-const CascadeWrapper = styled.div`
+const CascadeWrapper = styled.div<{ isDisabled: boolean }>`
   margin: 2rem;
+  box-shadow: ${({ isDisabled }) => (isDisabled ? '0' : theme.enabledDroppableShadow)};
 `
 
 type Props = {
@@ -18,10 +21,17 @@ type Props = {
 
 export const Cascade = ({ index }: Props) => {
   const cards = useSelector((state: RootState) => getCascade(state, index))
+  const draggedCard = useSelector(getDraggedCard)
+  const lastCard = cards[cards.length - 1]
+  const isDisabled = !(
+    !!draggedCard &&
+    isSmallerByOne(draggedCard, lastCard) &&
+    hasOppositeColor(draggedCard, lastCard)
+  )
   return (
-    <Droppable droppableId={`c${index}`}>
+    <Droppable droppableId={`c${index}`} isDropDisabled={isDisabled}>
       {(provided) => (
-        <CascadeWrapper {...provided.droppableProps} ref={provided.innerRef}>
+        <CascadeWrapper {...provided.droppableProps} ref={provided.innerRef} isDisabled={isDisabled}>
           {cards.length > 0 ? (
             <>
               {_.map(cards, (card, i) => (

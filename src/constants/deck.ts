@@ -7,7 +7,7 @@ export const DECK: Record<string, Card> = {
     value: '2'
   },
   C3: {
-    id: 'C3',
+    id: 'C2',
     suit: 'C',
     value: '3'
   },
